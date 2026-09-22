@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "author": "Villarrica Smartflow - Nodo B",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": -19.2, "left": 4.84, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "vehRojo",
+      "top": -320.4,
+      "left": -428.2,
+      "attrs": { "color": "red", "label": "VEH rojo" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "vehAmarillo",
+      "top": -243.6,
+      "left": -399.4,
+      "attrs": { "color": "yellow", "label": "VEH amarillo" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "vehVerde",
+      "top": -138,
+      "left": -370.6,
+      "attrs": { "color": "green", "label": "VEH verde" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rVehR",
+      "top": -280,
+      "left": -330,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rVehA",
+      "top": -210,
+      "left": -330,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rVehV",
+      "top": -140,
+      "left": -330,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "peaRojo",
+      "top": -349.2,
+      "left": 224.6,
+      "attrs": { "color": "red", "label": "PEAT alto" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "peaVerde",
+      "top": -166.8,
+      "left": 272.6,
+      "attrs": { "color": "green", "label": "PEAT cruce" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rPeaR",
+      "top": -280,
+      "left": 330,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rPeaV",
+      "top": -210,
+      "left": 330,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn",
+      "top": 150.2,
+      "left": 412.8,
+      "attrs": { "color": "green", "label": "Solicitud de cruce" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "ledBoton",
+      "top": 226.8,
+      "left": 464.6,
+      "attrs": { "color": "yellow", "label": "Solicitud OK" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rBoton",
+      "top": 291.95,
+      "left": 585.6,
+      "attrs": { "value": "220" }
+    },
+    { "type": "wokwi-buzzer", "id": "bz", "top": 250, "left": -120, "attrs": { "volume": "0.1" } },
+    {
+      "type": "wokwi-pir-motion-sensor",
+      "id": "detVeh",
+      "top": 128.8,
+      "left": -496.98,
+      "attrs": {}
+    },
+    {
+      "type": "board-ssd1306",
+      "id": "oled",
+      "top": -6.46,
+      "left": 355.43,
+      "attrs": { "i2cAddress": "0x3c" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:27", "vehRojo:A", "red", [ "h0" ] ],
+    [ "vehRojo:C", "rVehR:1", "black", [ "h0" ] ],
+    [ "rVehR:2", "esp:GND.1", "black", [ "h0" ] ],
+    [ "esp:26", "vehAmarillo:A", "orange", [ "h0" ] ],
+    [ "vehAmarillo:C", "rVehA:1", "black", [ "h0" ] ],
+    [ "rVehA:2", "esp:GND.1", "black", [ "h0" ] ],
+    [ "esp:25", "vehVerde:A", "green", [ "h0" ] ],
+    [ "vehVerde:C", "rVehV:1", "black", [ "h0" ] ],
+    [ "rVehV:2", "esp:GND.1", "black", [ "h0" ] ],
+    [ "esp:33", "peaRojo:A", "red", [ "h0" ] ],
+    [ "peaRojo:C", "rPeaR:1", "black", [ "h0" ] ],
+    [ "rPeaR:2", "esp:GND.2", "black", [ "h0" ] ],
+    [ "esp:32", "peaVerde:A", "green", [ "h0" ] ],
+    [ "peaVerde:C", "rPeaV:1", "black", [ "h0" ] ],
+    [ "rPeaV:2", "esp:GND.2", "black", [ "h0" ] ],
+    [ "esp:5", "ledBoton:A", "gold", [ "h0" ] ],
+    [ "ledBoton:C", "rBoton:1", "black", [ "h0" ] ],
+    [ "rBoton:2", "esp:GND.2", "black", [ "h0" ] ],
+    [ "btn:1.l", "esp:4", "blue", [ "h0" ] ],
+    [ "btn:2.l", "esp:GND.3", "black", [ "h0" ] ],
+    [ "bz:1", "esp:GND.3", "black", [ "h0" ] ],
+    [ "bz:2", "esp:13", "purple", [ "h0" ] ],
+    [ "detVeh:VCC", "esp:3V3", "red", [ "h0" ] ],
+    [ "detVeh:GND", "esp:GND.1", "black", [ "h0" ] ],
+    [ "detVeh:OUT", "esp:14", "green", [ "h0" ] ],
+    [ "oled:VCC", "esp:3V3", "red", [ "h0" ] ],
+    [ "oled:GND", "esp:GND.1", "black", [ "h0" ] ],
+    [ "oled:SDA", "esp:21", "green", [ "h0" ] ],
+    [ "oled:SCL", "esp:22", "blue", [ "h0" ] ]
+  ],
+  "dependencies": {}
+}
